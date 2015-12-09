@@ -1,8 +1,6 @@
 import smtplib
 import imaplib
 import email
-
-
 from datetime import date
 
 
