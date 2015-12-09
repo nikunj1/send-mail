@@ -4,29 +4,18 @@ import email
 from datetime import date
 
 
-
-
 def getLastInbox(count = 4):
   mailbox = imaplib.IMAP4_SSL('imap.gmail.com')
   mailbox.login('nikunj.sevens@gmail.com', 'nikunj@123')
-
   selected = mailbox.select('INBOX')
-  assert selected[0] == 'OK'
-  messageCount = int(selected[1][0])
-
-  for i in range(messageCount, messageCount - count, -1):
-    result, data = mailbox.search(None, "ALL")
-    ids = data[0]
-    id_list = ids.split()
-    latest_email_id = id_list[-1]
-
-    result, data = mailbox.fetch(latest_email_id, '(RFC822)')
-    
-   
-    raw_email = data[0][1]
-
-    email_message = email.message_from_string(raw_email)
-    print email_message['subject']
+  result, data = mailbox.search(None, "ALL")
+  ids = data[0]
+  id_list = ids.split()
+  latest_email_id = id_list[-1]
+  result, data = mailbox.fetch(latest_email_id, '(RFC822)')
+  raw_email = data[0][1]
+  email_message = email.message_from_string(raw_email)
+  print email_message['subject']
   return True
     
   mailbox.logout()
@@ -53,20 +42,12 @@ if __name__ == '__main__':
 	sub = raw_input('enter the subject:')
 	now = date.today().strftime("%d/%m/%y")
 	msg = ("From:%s\r\nTo:%s \r\nSubject:%s\r\n\r\n Hello,\r\nThis is the message body.\r\n\r\nThank you." % (fromaddr,toaddr,sub))
-	
 	print now+'\n'
 	print msg+'\n'
-	
 	success = send_message(fromaddr,toaddr,msg)
 	
 	if success=='login_err':
 	    print 'Error logging in'
 	getLastInbox()
-	#for message in listLastInbox():
-    	#	print '-' * 40
-    	#	for h, v in message.items():
-      	#		print u'{0:8s}: {1}'.format(h.upper(), v)
-	#	print message.items()	
-	#if success=='send_err':
-	#    print 'Error sending message'
+	
 
