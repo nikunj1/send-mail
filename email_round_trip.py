@@ -11,7 +11,7 @@ def send_message(addr, to, msg,sendTime):
     		server.ehlo()
     		server.starttls()
     		server.ehlo()
-    		server.login('nikunj.sevens@gmail.com','nikunj@123')
+    		server.login('nikunj.svens@gmail.com','nikunj@1')
 		
 		server.sendmail(addr, to, msg)
 
@@ -28,7 +28,7 @@ def send_message(addr, to, msg,sendTime):
 def getLastInbox_subject():
 	print 'Trying to read message:'
   	mailbox = imaplib.IMAP4_SSL('imap.gmail.com')
-  	mailbox.login('ramoliya2013@gmail.com', '9601949163')
+  	mailbox.login('ramoli013@gmail.com', '96019493')
   	selected = mailbox.select('INBOX')
   	result, data = mailbox.search(None, "ALL")
   	ids = data[0]
